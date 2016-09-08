@@ -6,6 +6,21 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* GET products page. */
+router.get('/products', function(req, res, next) {
+  res.render('products', { title: 'Product' });
+});
+
+/* GET User Account page. */
+router.get('/user-account', function(req, res, next) {
+  res.render('index', { title: 'Account' });
+});
+
+/* GET User Products page. */
+router.get('/user-products', function(req, res, next) {
+  res.render('index', { title: 'My Products' });
+});
+
 /* GET Hello World page. */
 router.get('/helloworld', function(req, res) {
     res.render('helloworld', { title: 'Hello, World!' });
