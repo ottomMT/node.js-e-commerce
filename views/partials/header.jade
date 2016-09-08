@@ -1,0 +1,34 @@
+doctype html
+html
+	head
+		title= title
+		
+		link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css')
+		link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	
+	body.override
+		nav.navbar.navbar-inverse(role="navigation")
+			div.container
+				div.navbar-header
+					button(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false").navbar-toggle.collapsed
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a(href="/").navbar-brand NodeJs with MongodDB
+				
+				div#navbar.collapse.navbar-collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a(href="products") Products
+							li.dropdown
+								a(href="#", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false").dropdown-toggle Dashboard 
+									span.caret
+								ul.dropdown-menu
+									li
+										a(href="user-account") Account
+									li
+										a(href="user-products") Manage Products
+							li
+								a(href="user-logout") Logout
