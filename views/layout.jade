@@ -1,12 +1,6 @@
-doctype html
-html
-	head
-		title= title
-		link(rel='stylesheet', href='/stylesheets/style.css')
-		link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-		
-		script(src="/Scripts/jquery.timeago.js")
-	body
-		block content
-		
-	include footer
+include partials/header
+
+body
+	block content
+	
+include partials/footer
