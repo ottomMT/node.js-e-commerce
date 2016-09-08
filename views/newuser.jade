@@ -1,8 +1,13 @@
 extends layout
 
 block content
-    h1= title
-    form#formAddUser(name="adduser",method="post",action="/adduser")
-        input#inputUserName(type="text", placeholder="username", name="username").form-control
-        input#inputUserEmail(type="text", placeholder="useremail", name="useremail").form-control
-        button#btnSubmit(type="submit").btn.btn-success submit
+	.container
+		h1= title
+		form#formAddUser(name="adduser",method="post",action="/adduser")
+			div.col-md-6
+				div.form-group
+					label(for="username")
+					input#inputUserName(type="text", placeholder="username", name="username").form-control
+					label(for="useremail")
+					input#inputUserEmail(type="text", placeholder="useremail", name="useremail").form-control
+				button#btnSubmit(type="submit").btn.btn-success submit
