@@ -1,8 +1,86 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+.section-colored, .section { padding: 50px 0; }
+.section-colored { background-color: #e1e1e1; }
 
-a {
-  color: #00B7FF;
-}
+/* Padding 10px */
+.override .p-d { padding: 10px; }
+.override .p-t { padding-top: 10px; }
+.override .p-b { padding-bottom: 10px; }
+.override .p-l { padding-left: 10px; }
+.override .p-r { padding-right: 10px; }
+.override .p-lr { padding-left: 10px; padding-right: 10px; }
+.override .p-tb { padding-top: 10px; padding-bottom: 10px; }
+.override .p-0 { padding: 0; }
+
+/* Padding 20px */
+.override .pl-d { padding: 20px; }
+.override .pl-t { padding-top: 20px; }
+.override .pl-b { padding-bottom: 20px; }
+.override .pl-l { padding-left: 20px; }
+.override .pl-r { padding-right: 20px; }
+.override .pl-lr { padding-left: 20px; padding-right: 20px; }
+.override .pl-tb { padding-top: 20px; padding-bottom: 20px; }
+
+/* Margin 10px */
+.override .m-0 { margin: 0; }
+.override .m-d { margin: 10px; }
+.override .m-t { margin-top: 10px; }
+.override .m-b { margin-bottom: 10px; }
+.override .m-l { margin-left: 10px; }
+.override .m-r { margin-right: 10px; }
+.override .m-lr { margin-left: 10px; margin-right: 10px; }
+.override .m-tb { margin-top: 10px; margin-bottom: 10px; }
+
+/* Margin 20px */
+.override .ml-d { margin: 20px; }
+.override .ml-t { margin-top: 20px; }
+.override .ml-b { margin-bottom: 20px; }
+.override .ml-l { margin-left: 20px; }
+.override .ml-r { margin-right: 20px; }
+.override .ml-lr { margin-left: 20px; margin-right: 20px; }
+.override .ml-tb { margin-top: 20px; margin-bottom: 20px; }
+
+/* Borders */
+.override .b-0 { border: 0; }
+.override .b-d { border: 1px solid #ddd; }
+.override .b-t { border-top: 1px solid #ddd; }
+.override .b-r { border-right: 1px solid #ddd; }
+.override .b-b { border-bottom: 1px solid #ddd; }
+.override .b-l { border-left: 1px solid #ddd; }
+.override .bl-t, .bl-t-nh { border-top: 4px solid #ddd; }
+.override .bl-t:hover, .bl-t-h { border-top: 4px solid #1C79DA; }
+
+/* Displays */
+.override .d-i { display: inline; }
+.override .d-ib { display: inline-block; }
+.override .d-b { display: block; }
+.override .d-n { display: none; }
+.override .d-tc { display: table-cell; }
+
+/* Text Color Accents */
+.override .a-1 { color: #F36519; }
+
+/* Floats */
+.override .fl-l { float: left; }
+.override .fl-r { float: right; }
+.override .fl-n { float: none; }
+
+/* Font Styles */
+.override .f-b { font-weight: bold; }
+.override .f-i { font-style: italic; }
+.override .f-n { font-style: none; font-weight: none; text-decoration: none; }
+
+/* Positions */
+.override .pn-r { position: relative; }
+.override .pn-a { position: absolute; }
+.override .pn-s { position: static; }
+
+.override .c-p { cursor: pointer; }
+
+/* Change bootstrap slider transition effect to Fade */
+.carousel-fade .carousel-inner .item { opacity: 0; -webkit-transition-property: opacity; -moz-transition-property: opacity; -o-transition-property: opacity; transition-property: opacity; }
+.carousel-fade .carousel-inner .active { opacity: 1; }
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right { left: 0; opacity: 0; z-index: 1; }
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right { opacity: 1; }
+.carousel-fade .carousel-control { z-index: 2; }
