@@ -36,6 +36,11 @@ router.get('/user-products', function(req, res, next) {
   res.render('user-products', { title: 'My Products' });
 });
 
+/* GET User Products Add page. */
+router.get('/user-products-add', function(req, res, next) {
+  res.render('user-products-add', { title: 'Add Product' });
+});
+
 /* GET Hello World page. */
 router.get('/helloworld', function(req, res) {
     res.render('helloworld', { title: 'Hello, World!' });
