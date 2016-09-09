@@ -21,14 +21,16 @@ html
 				div#navbar.collapse.navbar-collapse
 					ul.nav.navbar-nav.navbar-right
 						li
-							a(href="products") Products
+							a(href="/products") Products
 							li.dropdown
 								a(href="#", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false").dropdown-toggle Dashboard 
 									span.caret
 								ul.dropdown-menu
 									li
-										a(href="user-account") Account
+										a(href="/user/account") Account
 									li
-										a(href="user-products") Manage Products
+										a(href="/user/products") My Products
+									li
+										a(href="/user/products/add") Add Product
 							li
-								a(href="user-logout") Logout
+								a(href="/user/logout") Logout
