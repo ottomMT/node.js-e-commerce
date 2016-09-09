@@ -3,42 +3,42 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('front/index', { title: 'NodeJS with MongoDB' });
 });
 
 /* GET home page. */
 router.get('/login', function(req, res, next) {
-  res.render('user-login', { title: 'Login' });
+  res.render('front/login', { title: 'Login' });
 });
 
 /* GET home page. */
 router.get('/register', function(req, res, next) {
-  res.render('user-register', { title: 'Register' });
-});
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('front/register', { title: 'Register' });
 });
 
 /* GET products page. */
 router.get('/products', function(req, res, next) {
-  res.render('products', { title: 'Product' });
+  res.render('front/products', { title: 'Product' });
 });
 
 /* GET User Account page. */
-router.get('/user-account', function(req, res, next) {
-  res.render('user-account', { title: 'Account' });
+router.get('/user/account', function(req, res, next) {
+  res.render('user/account', { title: 'Account' });
 });
 
 /* GET User Products page. */
-router.get('/user-products', function(req, res, next) {
-  res.render('user-products', { title: 'My Products' });
+router.get('/user/products', function(req, res, next) {
+  res.render('user/products', { title: 'My Products' });
 });
 
 /* GET User Products Add page. */
-router.get('/user-products-add', function(req, res, next) {
-  res.render('user-products-add', { title: 'Add Product' });
+router.get('/user/products/add', function(req, res, next) {
+  res.render('user/products-add', { title: 'Add Product' });
+});
+
+/* GET User Products Edit page. */
+router.get('/user/products/edit', function(req, res, next) {
+  res.render('user/products-edit', { title: 'Edit Product' });
 });
 
 /* GET Hello World page. */
