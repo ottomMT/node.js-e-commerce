@@ -28,12 +28,12 @@ router.get('/products', function(req, res, next) {
 
 /* GET User Account page. */
 router.get('/user-account', function(req, res, next) {
-  res.render('index', { title: 'Account' });
+  res.render('user-account', { title: 'Account' });
 });
 
 /* GET User Products page. */
 router.get('/user-products', function(req, res, next) {
-  res.render('index', { title: 'My Products' });
+  res.render('user-products', { title: 'My Products' });
 });
 
 /* GET Hello World page. */
