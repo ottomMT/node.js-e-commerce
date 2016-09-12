@@ -1,8 +1,7 @@
 extends ../layout
 
 block content
-	//- .container.products-view-all
-	.container
+	.container.products-view-all
 		form.post-list
 			input(type='hidden', value='')
 		.clearfix
@@ -10,7 +9,7 @@ block content
 				.form-group
 					label Per Page: 
 					select.form-control.post_max.m-b
-						option(value='20') 20
+						option(value='1') 1
 						option(value='50') 50
 						option(value='100') 100
 				label Search Keyword: 
@@ -26,24 +25,30 @@ block content
 						option(value='DESC') DESC
 				input.btn.btn-primary.post_search_submit.m-b(type='submit', value='Filter')
 		hr
+			
 		.clearfix
-			each item, key in products
-				.col-sm-3
-					.panel.panel-default
-						.panel-heading #{item.name}
-						
-						panel-body.p-0.p-b
-							a(href="/products-single")
-								img.img-responsive(src="", width="100%")
-							.list-group.m-0
-								.list-group-item.b-0.b-t
-									i.fa.fa-calendar-o.fa-2x.pull-left.ml-r
-									p.list-group-item-text Price
-									h4.list-group-item-heading $#{item.price}
-								.list-group-item.b-0.b-t
-									i.fa.fa-calendar-o.fa-2x.pull-left.ml-r
-									p.list-group-item-text Quantity
-									h4.list-group-item-heading #{item.quantity}
-						panel-footer
-							p
-								a.btn.btn-success.btn-block(href="/products-single") View Item
+			.pagination-container.clearfix
+			.pagination-nav
+	
+		//-
+			.clearfix
+				each item, key in products
+					.col-sm-3
+						.panel.panel-default
+							.panel-heading #{item.name}
+							
+							panel-body.p-0.p-b
+								a(href="/products-single")
+									img.img-responsive(src="", width="100%")
+								.list-group.m-0
+									.list-group-item.b-0.b-t
+										i.fa.fa-calendar-o.fa-2x.pull-left.ml-r
+										p.list-group-item-text Price
+										h4.list-group-item-heading $#{item.price}
+									.list-group-item.b-0.b-t
+										i.fa.fa-calendar-o.fa-2x.pull-left.ml-r
+										p.list-group-item-text Quantity
+										h4.list-group-item-heading #{item.quantity}
+							panel-footer
+								p
+									a.btn.btn-success.btn-block(href="/products-single") View Item

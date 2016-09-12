@@ -98,7 +98,7 @@ var app = {
 		this.ajax_get_user_items_pagination = function(page, th_name, th_sort){
 			
 			if($(".pagination-container").length > 0 && $(".products-view-user").length > 0){
-				$(".pagination-container").html('<img src="img/loading.gif" class="ml-tb" />');
+				$(".pagination-container").html('<img src="images/loading.gif" class="ml-tb" />');
 				
 				var post_data = {
 					page: page,
@@ -182,7 +182,7 @@ var app = {
 		this.ajax_get_all_items_pagination = function(page, order_by_name, order_by_sort){
 			
 			if($(".pagination-container").length > 0 && $('.products-view-all').length > 0 ){
-				$(".pagination-container").html('<img src="img/loading.gif" class="ml-tb" />');
+				$(".pagination-container").html('<img src="images/loading.gif" class="ml-tb" />');
 				
 				var post_data = {
 					page: page,
@@ -200,11 +200,11 @@ var app = {
 				};
 				
 				$.ajax({
-					url: 'inc/ajax/products/view-front.php',
+					url: 'products/view-front',
 					type: 'POST',
-					data: data,
+					contentType: 'application/json',
+					data: JSON.stringify(data),
 					success: function (response) {
-						response = JSON.parse(response);
 						
 						if($(".pagination-container").html(response.content)){
 							$('.pagination-nav').html(response.navigation);
