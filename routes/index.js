@@ -4,17 +4,17 @@ var async = require('async');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('front/index', { title: 'NodeJS with MongoDB' });
+	res.render('front/index', { title: 'NodeJS with MongoDB' });
 });
 
-/* GET home page. */
+/* GET login page. */
 router.get('/login', function(req, res, next) {
-  res.render('front/login', { title: 'Login' });
+	res.render('front/login', { title: 'Login' });
 });
 
-/* GET home page. */
+/* GET registration page. */
 router.get('/register', function(req, res, next) {
-  res.render('front/register', { title: 'Register' });
+	res.render('front/register', { title: 'Register' });
 });
 
 /* GET products page. */
@@ -31,17 +31,17 @@ router.get('/products', function(req, res, next) {
 
 /* GET User Account page. */
 router.get('/user/account', function(req, res, next) {
-  res.render('user/account', { title: 'Account' });
+	res.render('user/account', { title: 'Account' });
 });
 
 /* GET User Products page. */
 router.get('/user/products', function(req, res, next) {
-  res.render('user/products', { title: 'My Products' });
+	res.render('user/products', { title: 'My Products' });
 });
 
 /* GET User Products Add page. */
 router.get('/user/products/add', function(req, res, next) {
-  res.render('user/products-add', { title: 'Add Product' });
+	res.render('user/products-add', { title: 'Add Product' });
 });
 
 /* POST to Add User Service */
@@ -49,21 +49,19 @@ router.post('/user/products/create', function(req, res) {
 
     /* Set our internal DB variable */
     var db = req.db;
-
-    /* Get our form values. These rely on the "name" attributes */
-    var product_name = req.body.name;
-    var product_content = req.body.content;
-	var product_excerpt = req.body.excerpt;
-    var product_price = req.body.price;
-    var product_status = req.body.status;
-    var product_quantity = req.body.quantity;
-    var product_date = req.body.date;
-  
-    /* Set our collection */
-    var collection = db.get('products');
-
+		products = db.get('products');
+		
+		/* Get our form values. These rely on the "name" attributes */
+		product_name = req.body.name;
+		product_content = req.body.content;
+		product_excerpt = req.body.excerpt;
+		product_price = req.body.price;
+		product_status = req.body.status;
+		product_quantity = req.body.quantity;
+		product_date = req.body.date;
+		
     /* Submit to the DB */
-    collection.insert({
+    products.insert({
         "name" : product_name,
         "content" : product_content,
         "excerpt" : product_excerpt,
@@ -78,11 +76,65 @@ router.post('/user/products/create', function(req, res) {
         }
         else {
             /* And forward to success page */
-            res.redirect("/user/products/edit");
+            res.send(doc._id);
         }
     });
 });
 
+/* GET User Products Edit page. */
+router.get('/user/products/edit/:id', function(req, res, next) {
+	
+	var db = req.db;
+		item_id = req.params.id
+		item_id_check = item_id.match(/^[0-9a-fA-F]{24}$/);
+		products = db.get('products');
+		item_details = '';
+	
+	/* Check if the object id is valid */
+	if( item_id_check ){
+		async.parallel([
+			function(callback) {
+				products.findOne(item_id).then((doc) => {
+					item_details = doc;
+					callback();
+				});
+			}	
+		], function(err) {
+			res.render('user/products-edit', { 
+				title: 'Edit Product',
+				item: item_details
+			});
+		});
+		
+	} else {
+		res.status(404).send('Invalid Item ID');
+	}
+});
+
+router.post('/user/products/update', function(req, res){
+	/* Set our internal DB variable */
+    var db = req.db;
+		products = db.get('products');
+	
+	products.update(req.body.id, {
+        'name' : req.body.name,
+        'content' : req.body.content,
+        'excerpt' : req.body.excerpt,
+        'price' : req.body.price,
+        'status' : req.body.status,
+        'quantity' : req.body.quantity,
+        'date' : req.body.date
+    }, function (err, doc) {
+        if(err) {
+            /* If it failed, return error */
+            res.send("There was a problem updating the information on the database.");
+        } else {
+            /* And forward to success page */
+            res.send({'status' : 1});
+        }
+    });
+	
+});
 
 router.post('/products/view-front', function(req, res){
 	
@@ -257,11 +309,6 @@ router.post('/products/view-front', function(req, res){
 /* GET User Products Edit page. */
 router.get('/user/products/edit', function(req, res, next) {
   res.render('user/products-edit', { title: 'Edit Product' });
-});
-
-/* GET Hello World page. */
-router.get('/helloworld', function(req, res) {
-    res.render('helloworld', { title: 'Hello, World!' });
 });
 
 /* GET Userlist page. */
