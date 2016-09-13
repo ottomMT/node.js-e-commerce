@@ -29,26 +29,3 @@ block content
 		.clearfix
 			.pagination-container.clearfix
 			.pagination-nav
-	
-		//-
-			.clearfix
-				each item, key in products
-					.col-sm-3
-						.panel.panel-default
-							.panel-heading #{item.name}
-							
-							panel-body.p-0.p-b
-								a(href="/products-single")
-									img.img-responsive(src="", width="100%")
-								.list-group.m-0
-									.list-group-item.b-0.b-t
-										i.fa.fa-calendar-o.fa-2x.pull-left.ml-r
-										p.list-group-item-text Price
-										h4.list-group-item-heading $#{item.price}
-									.list-group-item.b-0.b-t
-										i.fa.fa-calendar-o.fa-2x.pull-left.ml-r
-										p.list-group-item-text Quantity
-										h4.list-group-item-heading #{item.quantity}
-							panel-footer
-								p
-									a.btn.btn-success.btn-block(href="/products-single") View Item
