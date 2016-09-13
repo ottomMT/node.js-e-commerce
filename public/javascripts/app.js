@@ -292,7 +292,7 @@ var app = {
 					if(response == 0){
 						Lobibox.notify('error', {msg: 'Failed to create the product, please try again', size: 'mini', sound: false});
 					} else {
-						window.location.href = 'user-products-edit.php?id=' + response + '&status=created';
+						window.location.href = '/user/products/edit/' + response + '?status=created';
 					}
 				}
             });
