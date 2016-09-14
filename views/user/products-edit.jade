@@ -10,7 +10,7 @@ block content
 				.panel-heading
 					| Add Product
 				.panel-body
-					form.create-product(method='post', action='/user/products/update')
+					form.update-product(method='post', action='/user/products/update')
 						input(type='hidden', name='id' value='#{item._id}')
 						.col-md-8
 							.form-group
@@ -30,9 +30,10 @@ block content
 									input.form-control.required(type='text', name='price', value='#{item.price}', placeholder='Amount')
 							.form-group
 								label Status
+								- var select=null; if (item.status == 0) select='selected';
 								select.form-control(name='status')
 									option(value='1') Active
-									option(value='0') Inactive
+									option(value='0', selected=select) Inactive
 							.form-group
 								label Date
 								.input-group.date.datepicker
@@ -42,4 +43,4 @@ block content
 							.form-group
 								label Quantity*
 								input.form-control.required(type='number', name='quantity', value='#{item.quantity}')
-							input.btn.btn-success(type='submit', value='Submit')
+							input.btn.btn-success(type='submit', value='Update')
