@@ -44,39 +44,27 @@ router.get('/user/products/add', function(req, res, next) {
 	res.render('user/products-add', { title: 'Add Product' });
 });
 
-/* POST to Add User Service */
+/* POST to Add Item */
 router.post('/user/products/create', function(req, res) {
 
     /* Set our internal DB variable */
     var db = req.db;
 		products = db.get('products');
-		
-		/* Get our form values. These rely on the "name" attributes */
-		product_name = req.body.name;
-		product_content = req.body.content;
-		product_excerpt = req.body.excerpt;
-		product_price = req.body.price;
-		product_status = req.body.status;
-		product_quantity = req.body.quantity;
-		product_date = req.body.date;
-		
+	
     /* Submit to the DB */
     products.insert({
-        "name" : product_name,
-        "content" : product_content,
-        "excerpt" : product_excerpt,
-        "price" : product_price,
-        "status" : product_status,
-        "quantity" : product_quantity,
-        "date" : product_date
+        "name" : req.body.name,
+        "content" : req.body.content,
+        "excerpt" : req.body.excerpt,
+        "price" : req.body.price,
+        "status" : req.body.status,
+        "quantity" : req.body.quantity,
+        "date" : req.body.date
     }, function (err, doc) {
         if (err) {
-            /* If it failed, return error */
-            res.send("There was a problem adding the information to the database.");
-        }
-        else {
-            /* And forward to success page */
-            res.send(doc._id);
+            res.send(0); /* If it failed, return 0 (error) */
+        } else {
+            res.send(doc._id); /* Return document ID if insert was successfull */
         }
     });
 });
@@ -127,10 +115,16 @@ router.post('/user/products/update', function(req, res){
     }, function (err, doc) {
         if(err) {
             /* If it failed, return error */
-            res.send("There was a problem updating the information on the database.");
+            res.send({
+				'status' : 0,
+				'message' : 'There was a problem updating the information on the database.'
+			});
         } else {
             /* And forward to success page */
-            res.send({'status' : 1});
+            res.send({
+				'status' : 1,
+				'message' : 'Item successfully updated'
+			});
         }
     });
 	
@@ -155,7 +149,7 @@ router.post('/products/view-front', function(req, res){
 		
 		cur_page = page;
 		page -= 1;
-		per_page = max ? max : 40; 
+		per_page = max ? max : 16; 
 		previous_btn = true;
 		next_btn = true;
 		first_btn = true;
