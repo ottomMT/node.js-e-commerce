@@ -30,6 +30,36 @@ router.get('/products', function(req, res, next) {
 });
 
 /* GET User Account page. */
+router.get('/products/:id', function(req, res, next) {
+	
+	var db = req.db;
+		item_id = req.params.id
+		item_id_check = item_id.match(/^[0-9a-fA-F]{24}$/);
+		products = db.get('products');
+		item_details = '';
+	
+	/* Check if the object id is valid */
+	if( item_id_check ){
+		async.parallel([
+			function(callback) {
+				products.findOne(item_id).then((doc) => {
+					item_details = doc;
+					callback();
+				});
+			}	
+		], function(err) {
+			res.render('front/products-single', { 
+				title: item_details.name,
+				item: item_details
+			});
+		});
+		
+	} else {
+		res.status(404).send('Invalid Item ID');
+	}
+});
+
+/* GET User Account page. */
 router.get('/user/account', function(req, res, next) {
 	res.render('user/account', { title: 'Account' });
 });
