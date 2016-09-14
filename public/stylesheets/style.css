@@ -9,6 +9,24 @@
 .pagination-nav ul li.inactive {background: #CACACA;}
 .pagination-nav ul li.selected {background: #367fa9; color: white;}
 
+/* imageviewer CSS */
+.imageviewer {width: 100%; position: relative; height: 450px; background: #222; }
+.imageviewer .image-container {position: absolute; top: 0; left: 0; right: 0; bottom: 50px; }
+.imageviewer .prev, .imageviewer .next {position: absolute; margin-top: -20px; top: 50%; cursor: pointer; font-size: 30px; color: rgba(255,255,255,0.6); }
+.imageviewer .prev {left: 20px;}
+.imageviewer .next {right: 20px;}
+.imageviewer .footer-info {position: absolute; background: #fff; height: 50px; width: 100%; left: 0; bottom: 0; line-height: 50px; text-align: center; color: #333;}
+
+/* Wave Box Effect */
+.wave-box-effect{height:100%; width:20px;position:absolute;background:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZjRmNCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC43MSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);background:-moz-linear-gradient(left, rgba(255,244,244,0) 0%, rgba(255,255,255,0.71) 100%);background:-webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,244,244,0)), color-stop(100%,rgba(255,255,255,0.71)));background:-webkit-linear-gradient(left, rgba(255,244,244,0) 0%,rgba(255,255,255,0.71) 100%);background:-o-linear-gradient(left, rgba(255,244,244,0) 0%,rgba(255,255,255,0.71) 100%);background:-ms-linear-gradient(left, rgba(255,244,244,0) 0%,rgba(255,255,255,0.71) 100%);background:linear-gradient(to right, rgba(255,244,244,0) 0%,rgba(255,255,255,0.71) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00fff4f4', endColorstr='#b5ffffff',GradientType=1 )}
+.wave-box-wrapper{ position: relative;clear:both; min-height: 300px;}
+.wave-box{display:none;position:absolute;top:0px;left:0px;width:100%;height:100%;z-index:100;border:solid 1px ccc;background:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjQiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);background:-moz-linear-gradient(top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.4) 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(100%,rgba(0,0,0,0.4)));background:-webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.4) 100%);background:-o-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.4) 100%);background:-ms-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.4) 100%);background:linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.4) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d000000', endColorstr='#66000000',GradientType=0 )}
+
+/* CKEditor Overrides */
+.override .cke_top, .override .cke_bottom { background-image: none; background: #f5f5f5; border-bottom: 0; border-top: 0; }
+.override .cke_chrome { box-shadow: none; border: 1px solid #ccc; }
+.override .cke_toolgroup, .override a.cke_combo_button{ border-bottom-color: none; background-image: none; box-shadow: none; border: 1px solid #ccc; background: #fff; }
+
 /* Padding 10px */
 .override .p-d { padding: 10px; }
 .override .p-t { padding-top: 10px; }
