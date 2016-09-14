@@ -91,8 +91,6 @@ router.post('/user/products/view', function(req, res){
 	var count = '';
 	var sort_query = {};
 	
-	console.log(sort);
-	
 	/* We use async task to make sure we only return data when all queries completed successfully */
 	async.parallel([
 		function(callback) {
