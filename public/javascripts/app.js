@@ -66,8 +66,10 @@ var app = {
 			/* Pagination Clicks   */                  
 			$('body').on('click', '.pagination-nav li.active', function(){
 				var page = $(this).attr('p');
-				var current_sort = $(th_active).hasClass('DESC') ? 'DESC': 'ASC';
-				_this.ajax_get_user_items_pagination(page, th_name, current_sort);                
+				var current_th_active = $('.table-post-list th.active');
+				var current_sort = $(current_th_active).hasClass('DESC') ? 'DESC': 'ASC';
+				var current_name = $(current_th_active).attr('id');
+				_this.ajax_get_user_items_pagination(page, current_name, current_sort);                
 			}); 
 
 			/* Sorting Clicks */
