@@ -343,7 +343,7 @@ var app = {
 				var parent_element = $(this).parent();
 				
 				$.ajax({
-					url: 'inc/ajax/products/image.php',
+					url: '/products/image/unset',
 					type: 'POST',
 					data: {
 						'action': 'unset-image',
@@ -351,8 +351,7 @@ var app = {
 						'image': this.id.split('-')[1]
 					},
 					success: function (response) {
-						response = JSON.parse(response);
-						if(response.status == '1'){
+						if(response.status == 1){
 							parent_element.fadeOut();
 							Lobibox.notify('success', {msg: response.message, size: 'mini', sound: false});
 						} else {
@@ -381,7 +380,7 @@ var app = {
 					
 				} else {
 					$.ajax({
-						url: 'inc/ajax/products/image.php',
+						url: '/products/image/set-featured',
 						type: 'POST',
 						data: {
 							'action': 'set-featured-image',
@@ -390,9 +389,7 @@ var app = {
 						},
 						datatype: 'JSON',
 						success: function (response) {
-							response = JSON.parse(response);
-							
-							if(response.status == '1'){
+							if(response.status == 1){
 								if($('.images-section').find('span.glyphicon-star').switchClass('glyphicon-star', 'glyphicon-star-empty').removeAttr('style')){
 									$(_this).switchClass('glyphicon-star-empty', 'glyphicon-star').css('color', '#E4C317');
 									Lobibox.notify('success', {msg: response.message, size: 'mini', sound: false});
