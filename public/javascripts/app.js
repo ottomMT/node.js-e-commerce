@@ -258,7 +258,7 @@ var app = {
 								'<div class = "col-sm-3">' + 
 									'<span class="unset-image glyphicon glyphicon-remove text-danger lead m-0 c-p" id="unset-' + image + '" title="Delete image"></span>' + 
 									'<span class="set-featured-image glyphicon glyphicon-star-empty text-warning lead m-0 c-p" id="featured-' + image + '" title="Set as featured image"></span>' + 
-									'<img src = "img/uploads/' + image + '" class = "img-thumbnail img-responsive" />' + 
+									'<img src = "/images/uploads/' + image + '" class = "img-thumbnail img-responsive" />' + 
 								'</div>'
 							);
 						});
