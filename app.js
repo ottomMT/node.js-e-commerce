@@ -15,6 +15,9 @@ var users = require('./routes/users');
 
 var app = express();
 
+global.root_dir = path.resolve(__dirname);
+global.uploads_dir = root_dir + '/public/images/uploads/';
+
 /* view engine setup */
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
