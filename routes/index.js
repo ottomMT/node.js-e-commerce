@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var fs = require('fs');
 var path = require('path');
 var multer = require('multer');
 var crypto = require('crypto');
@@ -595,6 +596,62 @@ router.post('/adduser', function(req, res) {
             res.redirect("userlist");
         }
     });
+});
+
+/* Set as featured image */
+router.post('/products/image/set-featured', function(req, res){
+	/* Set our internal DB variable */
+    var db = req.db;
+		products = db.get('products');
+		
+	products.update(req.body.item_id, {
+		'$set' : {
+			'featured_image' : req.body.image
+		}
+	}, function (err, doc) {
+		if(doc){
+			res.send({
+				'status': 1,
+				'message': 'Image successfully set as featured'
+			});
+		} else {
+			res.send({
+				'status': 0,
+				'message': err
+			});
+		}
+	});
+});
+
+/* Delete image */
+router.post('/products/image/unset', function(req, res){
+	
+	fs.unlink(uploads_dir + req.body.image, (err) => {
+		if (err) throw err;
+		
+		/* Set our internal DB variable */
+		var db = req.db;
+			products = db.get('products');
+			
+		products.update(req.body.item_id, {
+			'$pull' : {
+				'images' : req.body.image
+			}
+		}, function (err, doc) {
+			if(doc){
+				res.send({
+					'status': 1,
+					'message': 'Image successfully deleted'
+				});
+			} else {
+				res.send({
+					'status': 0,
+					'message': err
+				});
+			}
+		});
+	});
+	
 });
 
 module.exports = router;
