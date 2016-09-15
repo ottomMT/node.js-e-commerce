@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-	.container
+	.container.item-edit(id='item-#{item._id}')
 		p.ml-b
 			a.ml-b.text-success(href='/user/products')
 				span.glyphicon.glyphicon-chevron-left
