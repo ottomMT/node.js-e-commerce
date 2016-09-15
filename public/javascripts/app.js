@@ -343,7 +343,7 @@ var app = {
 				var parent_element = $(this).parent();
 				
 				$.ajax({
-					url: '/products/image/unset',
+					url: '/user/products/image/unset',
 					type: 'POST',
 					data: {
 						'action': 'unset-image',
@@ -380,7 +380,7 @@ var app = {
 					
 				} else {
 					$.ajax({
-						url: '/products/image/set-featured',
+						url: '/user/products/image/set-featured',
 						type: 'POST',
 						data: {
 							'action': 'set-featured-image',
