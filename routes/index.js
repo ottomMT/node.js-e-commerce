@@ -1,6 +1,33 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+var path = require('path');
+var multer = require('multer');
+var crypto = require('crypto');
+var storage = multer.diskStorage({
+	destination: './public/images/uploads/', /* upload path */
+	filename: function (req, file, cb) {
+		/* Format: random hex using crypto + image extension */
+		crypto.pseudoRandomBytes(16, function (err, raw){
+			cb(null, raw.toString('hex') + path.extname(file.originalname));
+		});
+	}
+});
+var upload_image = multer({ 
+	storage: storage,
+	fileFilter: function (req, file, cb) {
+		var allowed_extensions = ['.jpg', '.png', '.gif', '.bmp', '.jpeg'];
+		var file_extension = path.extname(file.originalname);
+		/* Check if file extension is valid */
+		if(allowed_extensions.indexOf(file_extension) == -1){
+			console.log(file.originalname + ' is not a valid file type');
+			/* Do not upload if file is not an image */
+			return cb(null, false);
+		}
+		cb(null, true)
+	}
+});
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -298,19 +325,21 @@ router.get('/user/products/edit/:id', function(req, res, next) {
 	}
 });
 
-router.post('/user/products/update', function(req, res){
+router.post('/user/products/update', upload_image.array('images'), function(req, res, next){
 	/* Set our internal DB variable */
     var db = req.db;
 		products = db.get('products');
 	
 	products.update(req.body.id, {
-        'name' : req.body.name,
-        'content' : req.body.content,
-        'excerpt' : req.body.excerpt,
-        'price' : req.body.price,
-        'status' : req.body.status,
-        'quantity' : req.body.quantity,
-        'date' : req.body.date
+		'$set': {
+			'name' : req.body.name,
+			'content' : req.body.content,
+			'excerpt' : req.body.excerpt,
+			'price' : req.body.price,
+			'status' : req.body.status,
+			'quantity' : req.body.quantity,
+			'date' : req.body.date
+		}
     }, function (err, doc) {
         if(err) {
             /* If it failed, return error */
@@ -319,13 +348,33 @@ router.post('/user/products/update', function(req, res){
 				'message' : 'There was a problem updating the information on the database.'
 			});
         } else {
+			if(req.files){
+				var uploads = req.files;
+				var uploaded_images = [];
+				
+				/* Save image(s) to database */
+				for (var key in uploads) {
+					if (uploads.hasOwnProperty(key)) {
+						products.update(req.body.id, {
+							'$addToSet' : {
+								'images' : uploads[key].filename
+							}
+						});
+						uploaded_images.push(uploads[key].filename);
+					}
+				}
+			}
+			
             /* And forward to success page */
             res.send({
 				'status' : 1,
+				'images' : uploaded_images,
 				'message' : 'Item successfully updated'
 			});
         }
     });
+	
+	console.log(req.files);
 	
 });
 
@@ -501,11 +550,6 @@ router.post('/products/view-front', function(req, res){
 		
 	});
 
-});
-
-/* GET User Products Edit page. */
-router.get('/user/products/edit', function(req, res, next) {
-  res.render('user/products-edit', { title: 'Edit Product' });
 });
 
 /* GET Userlist page. */
