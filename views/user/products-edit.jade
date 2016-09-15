@@ -10,7 +10,7 @@ block content
 				.panel-heading
 					| Add Product
 				.panel-body
-					form.update-product(method='post', action='/user/products/update')
+					form.update-product(method='post', action='/user/products/update', enctype='multipart/form-data')
 						input(type='hidden', name='id' value='#{item._id}')
 						.col-md-8
 							.form-group
@@ -22,6 +22,29 @@ block content
 							.form-group
 								label Short Description
 								textarea.form-control(name='excerpt', rows='7') #{item.excerpt}
+							.form-group.ml-t
+								label Upload Images
+								input.form-control.image-input(type='file', name='images', accept='image/*', multiple='')
+								hr
+								.clearfix.m-t.images-section
+									- if (item.images){
+										- var image_count = 1;
+										each image, i in item.images
+											.col-sm-3
+												span.unset-image.glyphicon.glyphicon-remove.text-danger.lead.m-0.c-p(id='unset-#{image}', title='Delete image')
+												- if (item.featured_image == image){
+													span.set-featured-image.glyphicon.glyphicon-star.lead.m-0.c-p(title='Set as featured image', id='featured-#{image}', style='color: #E4C317')
+												- } else {
+													span.set-featured-image.glyphicon.glyphicon-star-empty.lead.m-0.c-p(title='Set as featured image', id='featured-#{image}')
+												- }
+												img.img-thumbnail.img-responsive(src='/images/uploads/#{image}')
+											- if( image_count%4 == 0 ){
+												.clearfix
+											- }
+											- image_count++;
+									- } else {
+										p.alert.alert-danger.no-item-images No images found
+									- }
 						.col-md-4
 							.form-group
 								label Price*
