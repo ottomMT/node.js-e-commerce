@@ -182,7 +182,7 @@ router.post('/user/products/view', function(req, res){
 		if( count ){
 			for (var key in all_items) {
 				pag_content += '<tr>' + 
-					'<td><img src="/img/uploads/' + all_items[key].featured_image + '" width="100" /></td>' + 
+					'<td><img src="/images/uploads/' + all_items[key].featured_image + '" width="100" /></td>' + 
 					'<td>' + all_items[key].name + '</td>' + 
 					'<td>$' + all_items[key].price + '</td>' + 
 					'<td>' + all_items[key].status + '</td>' + 
@@ -461,7 +461,7 @@ router.post('/products/view-front', function(req, res){
 							all_items[key].name +
 						'</div>' + 
 						'<div class="panel-body p-0 p-b">' + 
-							'<a href="/products/' + all_items[key]._id + '"><img src="img/uploads/' + all_items[key].featured_image + '" width="100%" class="img-responsive" /></a>' + 
+							'<a href="/products/' + all_items[key]._id + '"><img src="/images/uploads/' + all_items[key].featured_image + '" width="100%" class="img-responsive" /></a>' + 
 							'<div class="list-group m-0">' + 
 								'<div class="list-group-item b-0 b-t">' + 
 									'<i class="fa fa-calendar-o fa-2x pull-left ml-r"></i>' + 
