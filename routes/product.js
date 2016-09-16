@@ -207,9 +207,20 @@ router.get('/:id', function(req, res, next) {
 				});
 			}	
 		], function(err) {
+			
+			var images_array = [];
+			var len = item_details.images.length;
+			for (var i = 0; i < len; i++) {
+				images_array.push({
+					small: '/images/uploads/' + item_details.images[i],
+					big: '/images/uploads/' + item_details.images[i]
+				});
+			}
+			
 			res.render('front/products-single', { 
 				title: item_details.name,
-				item: item_details
+				item: item_details,
+				item_images: JSON.stringify(images_array)
 			});
 		});
 		
