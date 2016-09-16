@@ -316,7 +316,7 @@ var app = {
 				}
 				
 				$.ajax({
-					url: 'inc/ajax/products/delete.php',
+					url: '/user/products/delete',
 					type: 'POST',
 					data: data,
 					success: function (response) {

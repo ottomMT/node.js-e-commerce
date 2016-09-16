@@ -210,7 +210,7 @@ router.get('/add', function(req, res, next) {
 	res.render('user/products-add', { title: 'Add Product' });
 });
 
-/* POST to Add Item */
+/* Handle POST request to Add Item */
 router.post('/create', function(req, res) {
 
     /* Set our internal DB variable */
@@ -318,6 +318,49 @@ router.post('/update', upload_image.array('images'), function(req, res, next){
 	
 });
 
+/* Handle POST request to Delete Item */
+router.post('/delete', function(req, res) {
+	/* Set our internal DB variable */
+    var db = req.db;
+		item_id = req.body.item_id
+		item_id_check = item_id.match(/^[0-9a-fA-F]{24}$/);
+		products = db.get('products');
+		item_images = '';
+	
+	/* Check if the object id is valid */
+	if( item_id_check ){
+		async.parallel([
+			function(callback) {
+				products.findOne(item_id).then((doc) => {
+					/* Delete all images of this product */
+					var item_images = doc.images;;
+					var item_images_count = item_images.length;
+					for (var i = 0; i < item_images_count; i++) {
+						fs.unlink(uploads_dir + item_images[i], (err) => {
+							if (err) throw err;
+						});
+					}
+					callback();
+				});
+				
+			}
+		], function(err) {
+			/* Delete item data from the database */
+			products.remove({'_id': item_id}, function(err, result){
+				if(result == 1){
+					res.send('1');
+				} else {
+					res.send('0');
+				}
+			});
+		});
+		
+	} else {
+		res.status(404).send('Invalid Item ID');
+	}
+	
+});
+	
 /* Set as featured image */
 router.post('/image/set-featured', function(req, res){
 	/* Set our internal DB variable */
