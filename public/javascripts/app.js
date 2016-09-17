@@ -452,7 +452,27 @@ var app = {
 	
 	User: function() {
 		this.init = function() {
+			this.create_account();
 			this.update_account();
+		}
+		
+		this.create_account = function(){
+			$('.create-account').ajaxForm({
+				beforeSerialize: function() {
+					wave_box('on');
+				},
+				success: function(response, textStatus, xhr, form) {
+					if(response.status == 0){
+						Lobibox.notify('error', {msg: response.message, size: 'mini', sound: false});
+					}
+					
+					if(response.status == 1){
+						Lobibox.notify('success', {msg: response.message, size: 'mini', sound: false});
+					}
+					
+					wave_box('off');
+				}
+            });
 		}
 		
 		this.update_account = function(){
