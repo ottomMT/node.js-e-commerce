@@ -2,14 +2,30 @@ var express = require('express');
 var router = express.Router();
 var md5 = require('crypto-md5');
 var async = require('async');
+var passport = require('passport');
+var flash = require('connect-flash');
 
 /* GET login page. */
 router.get('/login', function(req, res, next) {
-	res.render('user/login', { title: 'Login' });
+	if (req.isAuthenticated()) res.redirect('/user/account');
+	
+	res.render('user/login', { 
+		message: req.flash('error'), 
+		title: 'Login'
+	});
 });
+
+router.post('/login', passport.authenticate('local', {
+		successRedirect: '/',
+		failureRedirect: '/user/login',
+		failureFlash: true
+	})
+);
 
 /* GET registration page. */
 router.get('/register', function(req, res, next) {
+	if (req.isAuthenticated()) res.redirect('/user/account');
+	
 	res.render('user/register', { title: 'Register' });
 });
 
@@ -68,12 +84,20 @@ router.post('/register/create', function(req, res, next) {
 
 /* GET User Account page. */
 router.get('/account', function(req, res, next) {
+	if (!req.isAuthenticated()) res.redirect('/user/login');
+	
 	res.render('user/account', { title: 'Account' });
 });
 
 /* POST Update User Account Info. */
 router.get('/account/update', function(req, res, next) {
 	
+});
+
+/* Handle Logout */
+router.get('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
 });
 
 module.exports = router;
