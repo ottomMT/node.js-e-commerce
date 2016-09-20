@@ -467,7 +467,7 @@ var app = {
 					}
 					
 					if(response.status == 1){
-						Lobibox.notify('success', {msg: response.message, size: 'mini', sound: false});
+						window.location.href = '/user/account';
 					}
 					
 					wave_box('off');
