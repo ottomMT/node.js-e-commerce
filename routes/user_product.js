@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 var async = require('async');
 var fs = require('fs');
 var path = require('path');
@@ -78,13 +77,16 @@ router.post('/view', function(req, res){
 		}
 	}
 	
-	/* Only query for items owned by currently logged in user 
-	var where = {
+	/* Only query for items owned by currently logged in user */
+	var where_author = {
 		'$and' : [
-			{'author' : current_user.email}
+			{'author' : req.user._id}
 		]
 	}
-	*/
+	
+	var where = {};
+    for ( var attrname in where_author ) { where[attrname] = where_author[attrname]; }
+    for ( var attrname in where_search ) { where[attrname] = where_search[attrname]; }
 	
 	var all_items = '';
 	var count = '';
@@ -97,7 +99,7 @@ router.post('/view', function(req, res){
 			sort_query[name] = sort;
 			
 			/* Retrieve all the posts */
-			products.find( where_search, {
+			products.find( where, {
 				limit: per_page,
 				skip: start,
 				sort: sort_query
@@ -111,7 +113,7 @@ router.post('/view', function(req, res){
 			});
 		},
 		function(callback) {
-			products.count(where_search, function(err, doc_count){
+			products.count(where, function(err, doc_count){
 				if (err) throw err;
 				// console.log(count);
 				count = doc_count;
@@ -135,6 +137,8 @@ router.post('/view', function(req, res){
 					'</td>' + 
 				'</tr>';
 			}
+		} else {
+			pag_content += '<td colspan="7" class="p-d bg-danger">No Products Found</td>';
 		}
 		
 		pag_content = pag_content + "<br class = 'clear' />";
