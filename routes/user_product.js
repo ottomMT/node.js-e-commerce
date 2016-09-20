@@ -32,7 +32,7 @@ var upload_image = multer({
 
 /* GET User Products page. */
 router.get('/', function(req, res, next) {
-	if (!req.isAuthenticated()) res.redirect('/user/login');
+	if (!req.isAuthenticated()) return res.redirect('/user/login');
 	
 	res.render('user/products', { title: 'My Products' });
 });
@@ -209,7 +209,7 @@ router.post('/view', function(req, res){
 
 /* GET User Products Add page. */
 router.get('/add', function(req, res, next) {
-	if (!req.isAuthenticated()) res.redirect('/user/login');
+	if (!req.isAuthenticated()) return res.redirect('/user/login');
 	
 	res.render('user/products-add', { title: 'Add Product' });
 });
@@ -241,7 +241,7 @@ router.post('/create', function(req, res) {
 
 /* GET User Products Edit page. */
 router.get('/edit/:id', function(req, res, next) {
-	if (!req.isAuthenticated()) res.redirect('/user/login');
+	if (!req.isAuthenticated()) return res.redirect('/user/login');
 	
 	var db = req.db;
 		item_id = req.params.id

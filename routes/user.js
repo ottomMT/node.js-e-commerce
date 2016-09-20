@@ -7,7 +7,7 @@ var flash = require('connect-flash');
 
 /* GET login page. */
 router.get('/login', function(req, res, next) {
-	if (req.isAuthenticated()) res.redirect('/user/account');
+	if (req.isAuthenticated()) return res.redirect('/user/account');
 	
 	res.render('user/login', { 
 		message: req.flash('error'), 
@@ -24,7 +24,7 @@ router.post('/login', passport.authenticate('local', {
 
 /* GET registration page. */
 router.get('/register', function(req, res, next) {
-	if (req.isAuthenticated()) res.redirect('/user/account');
+	if (req.isAuthenticated()) return res.redirect('/user/account');
 	
 	res.render('user/register', { title: 'Register' });
 });
@@ -84,7 +84,7 @@ router.post('/register/create', function(req, res, next) {
 
 /* GET User Account page. */
 router.get('/account', function(req, res, next) {
-	if (!req.isAuthenticated()) res.redirect('/user/login');
+	if (!req.isAuthenticated()) return res.redirect('/user/login');
 	
 	res.render('user/account', { title: 'Account' });
 });
