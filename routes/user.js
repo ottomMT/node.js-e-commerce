@@ -86,12 +86,82 @@ router.post('/register/create', function(req, res, next) {
 router.get('/account', function(req, res, next) {
 	if (!req.isAuthenticated()) return res.redirect('/user/login');
 	
-	res.render('user/account', { title: 'Account' });
+	var db = req.db;
+		users = db.get('users');
+	
+	async.parallel([
+		function(callback) {
+			users.findOne(req.user._id.toString()).then((doc) => {
+				user = doc;
+				callback();
+			});
+		}	
+	], function(err) {
+		res.render('user/account', { 
+			title: 'Account | ' + user.email,
+			user: user
+		});
+	});
 });
 
 /* POST Update User Account Info. */
-router.get('/account/update', function(req, res, next) {
+router.post('/account/update', function(req, res, next) {
 	
+	var db = req.db;
+		users = db.get('users');
+		posted_data = req.body;
+		post_fields_array = {};
+	
+	if( posted_data.old_password != '' || posted_data.password_confirm != '' || posted_data.password != '' ){
+		if( posted_data.password_confirm != posted_data.password ){
+			return res.send({
+				'status' : 0,
+				'message' : 'New password do not match.'
+			});
+		} else if( md5(posted_data.old_password) != req.user.password ){
+			return res.send({
+				'status' : 0,
+				'message' : 'Incorrect old password.'
+			});
+		}
+	}
+	
+	async.parallel([
+		function(callback) {
+			/* Let's build an array out of available values that are posted */
+			for (key in posted_data) {
+				if( key != 'email' && key != 'old_password' && key != 'password_confirm' && key != 'password' ){
+					post_fields_array[key] = posted_data[key];
+				}
+			}
+			
+			/* Check if we have a password to include in our update */
+			if( posted_data.password != '' ){
+				post_fields_array['password'] = md5(posted_data.password);
+			}
+			
+			callback();
+		},
+		function(callback) {
+			/* Update user profile */
+			users.update(req.user._id, {
+				'$set': post_fields_array
+			});
+			
+			callback();
+		}
+	], function(err) {
+		if(err){
+			return res.send({
+				'status' : 0,
+				'message' : 'Update failed, please try again.'
+			});
+		}
+		res.send({
+			'status' : 1,
+			'message' : 'Account successfully updated'
+		});
+	});
 });
 
 /* Handle Logout */
