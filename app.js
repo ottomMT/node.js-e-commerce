@@ -81,9 +81,10 @@ passport.deserializeUser(function(email, done) {
 	});
 });
 
-/* Make our db accessible to our router */
+
 app.use(function(req, res, next){
-    req.db = db;
+    req.db = db; /* Make our db accessible to our router */
+	res.locals.user = req.user; /* Make our user object accessible in all our templates. */
 	next();
 });
 
