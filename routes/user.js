@@ -65,16 +65,25 @@ router.post('/register/create', function(req, res, next) {
 				'last_name' : req.body.last_name,
 				'phone_number' : req.body.phone_number
 				
-			}, function (err, doc) {
+			}, function (err, user) {
 				if (err) {
 					res.send({
 						'status': 0,
 						'message': err
 					});
 				} else {
-					res.send({
-						'status': 1,
-						'message': doc._id /* Return document ID if insert was successfull */
+					/* Login the user */
+					req.login(user, function(err) {
+						if (err) {
+							res.send({
+								'status': 0,
+								'message': err
+							});
+						} else{
+							res.send({
+								'status': 1
+							});
+						}
 					});
 				}
 			});
