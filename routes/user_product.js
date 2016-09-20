@@ -80,7 +80,7 @@ router.post('/view', function(req, res){
 	/* Only query for items owned by currently logged in user */
 	var where_author = {
 		'$and' : [
-			{'author' : req.user._id}
+			{'author' : req.user._id.toString()}
 		]
 	}
 	
@@ -227,13 +227,14 @@ router.post('/create', function(req, res) {
 	
     /* Submit to the DB */
     products.insert({
-        "name" : req.body.name,
-        "content" : req.body.content,
-        "excerpt" : req.body.excerpt,
-        "price" : req.body.price,
-        "status" : req.body.status,
-        "quantity" : req.body.quantity,
-        "date" : req.body.date
+        'name' : req.body.name,
+		'author' : req.user._id.toString(),
+        'content' : req.body.content,
+        'excerpt' : req.body.excerpt,
+        'price' : req.body.price,
+        'status' : req.body.status,
+        'quantity' : req.body.quantity,
+        'date' : req.body.date
     }, function (err, doc) {
         if (err) {
             res.send(0); /* If it failed, return 0 (error) */
@@ -263,10 +264,15 @@ router.get('/edit/:id', function(req, res, next) {
 				});
 			}	
 		], function(err) {
-			res.render('user/products-edit', { 
-				title: 'Edit Product',
-				item: item_details
-			});
+			/* Make sure the current user owns the item */
+			if( req.user._id.toString() == item_details.author){
+				res.render('user/products-edit', { 
+					title: 'Edit Product',
+					item: item_details
+				});
+			} else {
+				res.status(404).send('You are not allowed to edit that item');
+			}
 		});
 		
 	} else {
