@@ -482,8 +482,6 @@ var app = {
 					wave_box('on');
 				},
 				success: function(response, textStatus, xhr, form) {
-					response = JSON.parse(response);
-					
 					if(response.status == 0){
 						Lobibox.notify('error', {msg: response.message, size: 'mini', sound: false});
 					}
