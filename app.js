@@ -20,6 +20,19 @@ var routes = require('./routes/index');
 
 var app = express();
 
+/* Setup socket.io and express to run on same port (3100) */
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(3100);
+
+/* Realtime trigger */
+io.sockets.on('connection', function (socket) {
+    socket.on('send', function (data) {
+        io.sockets.emit('message', data);
+    });
+});
+
 /* Define some globals that will be made accessible all through out the application */
 global.root_dir = path.resolve(__dirname);
 global.uploads_dir = root_dir + '/public/images/uploads/';
