@@ -9,6 +9,8 @@
 /**
  * Setup a App namespace to prevent JS conflicts.
  */
+
+var socket = io.connect('http://localhost:3100');
 var app = {
 		
     
@@ -237,7 +239,6 @@ var app = {
 					wave_box('on');
 				},
 				success: function(response, textStatus, xhr, form) {
-					
 					if(response.status == 0){
 						if($.isArray(response.errors)){
 							$.each(response.errors, function (key, error_nessage) {
@@ -249,6 +250,8 @@ var app = {
 						if(response.message){
 							Lobibox.notify('success', {msg: response.message, size: 'mini', sound: false});
 						}
+						
+						socket.emit('send', { message: $('.update-product').serializeObject() } );
 					}
 					if(response.images){
 						$('.image-input').val('');
@@ -397,6 +400,9 @@ var app = {
 							} else {
 								Lobibox.notify('error', {msg: response.message, size: 'mini', sound: false});
 							}
+							
+							socket.emit('send', { message: { featured: image_featured_id, id: $('.item-edit').attr('id').split('-')[1] } } );
+							
 							wave_box('off');
 						}
 					});
@@ -548,5 +554,20 @@ jQuery(document).ready( function () {
 	
 	user = new app.User(); /* Instantiate the User Class */
 	user.init(); /* Load User class methods */
+	
+	/* Update item data via real time */
+	socket.on('message', function(data) {
+		var data = data.message;
+		var item_id = '.item-' + data.id;
+		$(item_id + ' .item-name').html(data.name);
+		$(item_id + ' .item-price').html(parseFloat(data.price).toFixed(2));
+		$(item_id + ' .item-quantity').html(data.quantity);
+		$(item_id + ' .item-content').html(data.content);
+		$(item_id + ' .item-date').html(data.date);
+		
+		if(data.featured){
+			$(item_id + ' .item-featured').attr('src', '/images/uploads/' + data.featured);
+		}
+	});
 	
 });

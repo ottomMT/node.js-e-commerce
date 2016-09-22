@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-	.container.products-view
+	.container.products-view(class='item-#{item._id}')
 		.col-md-8
 			.panel.panel-default
 				.panel-heading
@@ -18,16 +18,18 @@ block content
 						span.total
 					hr
 					h3 Product Description
-					| !{item.content}
+					.item-content
+						| !{item.content}
 		.col-md-4
 			.panel.panel-default
-				.panel-heading
+				.panel-heading.item-name
 					| Product Details
 				.panel-body
 					h2.text-danger.m-0.ml-b
 						| $
-						| #{parseFloat(item.price).toFixed(2)} 
-						small only
+						span.item-price
+							| #{parseFloat(item.price).toFixed(2)}
+						small &nbsp; only
 					.clearfix
 						.col-md-6
 							span.sr-only Four out of Five Stars
@@ -45,11 +47,13 @@ block content
 					p
 						strong Date Posted
 						| :
-						| #{item.date} 
+						span.item-date
+							| #{item.date} 
 					p
 						strong Quantity
 						| :
-						| #{item.quantity} 
+						span.item-quantity
+							| #{item.quantity} 
 					hr
 					a.btn.btn-success.btn-block(href='#_')
 						span.glyphicon.glyphicon-shopping-cart

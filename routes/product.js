@@ -90,23 +90,23 @@ router.post('/view-front', function(req, res){
 		/* Check if our query returns anything. */
 		if( count ){
 			for (var key in all_items) {
-				pag_content += '<div class="col-sm-3">' + 
+				pag_content += '<div class="col-sm-3 item-' + all_items[key]._id + '">' + 
 					'<div class="panel panel-default">' + 
-						'<div class="panel-heading">' + 
+						'<div class="panel-heading item-name">' + 
 							all_items[key].name +
 						'</div>' + 
 						'<div class="panel-body p-0 p-b">' + 
-							'<a href="/products/' + all_items[key]._id + '"><img src="/images/uploads/' + all_items[key].featured_image + '" width="100%" class="img-responsive" /></a>' + 
+							'<a href="/products/' + all_items[key]._id + '"><img src="/images/uploads/' + all_items[key].featured_image + '" width="100%" class="img-responsive item-featured" /></a>' + 
 							'<div class="list-group m-0">' + 
 								'<div class="list-group-item b-0 b-t">' + 
 									'<i class="fa fa-calendar-o fa-2x pull-left ml-r"></i>' + 
 									'<p class="list-group-item-text">Price</p>' + 
-									'<h4 class="list-group-item-heading">$' + parseFloat(all_items[key].price).toFixed(2) + '</h4>' + 
+									'<h4 class="list-group-item-heading">$<span class="item-price">' + parseFloat(all_items[key].price).toFixed(2) + '</span></h4>' + 
 								'</div>' + 
 								'<div class="list-group-item b-0 b-t">' + 
 									'<i class="fa fa-calendar fa-2x pull-left ml-r"></i>' + 
 									'<p class="list-group-item-text">Quantity</p>' + 
-									'<h4 class="list-group-item-heading">' + all_items[key].quantity + '</h4>' + 
+									'<h4 class="list-group-item-heading item-quantity">' + all_items[key].quantity + '</h4>' + 
 								'</div>' + 
 							'</div>' + 
 						'</div>' + 
