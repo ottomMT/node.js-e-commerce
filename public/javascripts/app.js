@@ -559,14 +559,16 @@ jQuery(document).ready( function () {
 	socket.on('message', function(data) {
 		var data = data.message;
 		var item_id = '.item-' + data.id;
-		$(item_id + ' .item-name').html(data.name);
-		$(item_id + ' .item-price').html(parseFloat(data.price).toFixed(2));
-		$(item_id + ' .item-quantity').html(data.quantity);
-		$(item_id + ' .item-content').html(data.content);
-		$(item_id + ' .item-date').html(data.date);
-		
-		if(data.featured){
-			$(item_id + ' .item-featured').attr('src', '/images/uploads/' + data.featured);
+		for (var key in data) {
+			if (data.hasOwnProperty(key)) {
+				if(key == 'featured'){
+					$(item_id + ' .item-featured').attr('src', '/images/uploads/' + data[key]);
+				} else if(key == 'price') {
+					$(item_id + ' .item-price').html(parseFloat(data[key]).toFixed(2));
+				} else {
+					$(item_id + ' .item-' + key).html(data[key]);
+				}
+			}
 		}
 	});
 	
