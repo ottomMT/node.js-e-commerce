@@ -231,7 +231,7 @@ router.post('/create', function(req, res) {
 		'author' : req.user._id.toString(),
         'content' : req.body.content,
         'excerpt' : req.body.excerpt,
-        'price' : req.body.price,
+        'price' : parseFloat(req.body.price),
         'status' : req.body.status,
         'quantity' : req.body.quantity,
         'date' : req.body.date
@@ -290,7 +290,7 @@ router.post('/update', upload_image.array('images'), function(req, res, next){
 			'name' : req.body.name,
 			'content' : req.body.content,
 			'excerpt' : req.body.excerpt,
-			'price' : req.body.price,
+			'price' : parseFloat(req.body.price),
 			'status' : req.body.status,
 			'quantity' : req.body.quantity,
 			'date' : req.body.date
