@@ -233,7 +233,7 @@ router.post('/create', function(req, res) {
         'excerpt' : req.body.excerpt,
         'price' : parseFloat(req.body.price),
         'status' : req.body.status,
-        'quantity' : req.body.quantity,
+        'quantity' : parseInt(req.body.quantity),
         'date' : req.body.date
     }, function (err, doc) {
         if (err) {
@@ -292,7 +292,7 @@ router.post('/update', upload_image.array('images'), function(req, res, next){
 			'excerpt' : req.body.excerpt,
 			'price' : parseFloat(req.body.price),
 			'status' : req.body.status,
-			'quantity' : req.body.quantity,
+			'quantity' : parseInt(req.body.quantity),
 			'date' : req.body.date
 		}
     }, function (err, doc) {
