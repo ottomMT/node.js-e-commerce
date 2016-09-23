@@ -4,7 +4,7 @@ block content
 	.container.products-view(class='item-#{item._id}')
 		.col-md-8
 			.panel.panel-default
-				.panel-heading
+				.panel-heading.item-name
 					| #{item.name}
 				.panel-body
 					input.item-images-json(type='hidden', value='#{item_images}')
@@ -22,7 +22,7 @@ block content
 						| !{item.content}
 		.col-md-4
 			.panel.panel-default
-				.panel-heading.item-name
+				.panel-heading
 					| Product Details
 				.panel-body
 					h2.text-danger.m-0.ml-b
