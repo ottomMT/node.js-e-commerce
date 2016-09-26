@@ -37,9 +37,9 @@ This web application is currently hosted on Heroku, [click here](https://evening
 
 ## Author
 ### Carl Victor C. Fontanos
-Website: [carlofontanos.com](http://www.carlofontanos.com)
-Linkedin: [ph.linkedin.com/in/carlfontanos](http://ph.linkedin.com/in/carlfontanos)
-Facebook: [facebook.com/carlo.fontanos](http://facebook.com/carlo.fontanos)
-Twitter: [twitter.com/carlofontanos](http://twitter.com/carlofontanos)
-Google+: [plus.google.com/u/0/107219338853998242780/about](https://plus.google.com/u/0/107219338853998242780/about)
-GitHub: [github.com/carlo-fontanos](https://github.com/carlo-fontanos)
++ Website: [carlofontanos.com](http://www.carlofontanos.com)
++ Linkedin: [ph.linkedin.com/in/carlfontanos](http://ph.linkedin.com/in/carlfontanos)
++ Facebook: [facebook.com/carlo.fontanos](http://facebook.com/carlo.fontanos)
++ Twitter: [twitter.com/carlofontanos](http://twitter.com/carlofontanos)
++ Google+: [plus.google.com/u/0/107219338853998242780/about](https://plus.google.com/u/0/107219338853998242780/about)
++ GitHub: [github.com/carlo-fontanos](https://github.com/carlo-fontanos)
