@@ -105,8 +105,8 @@ router.post('/view-front', function(req, res){
 								'</div>' + 
 								'<div class="list-group-item b-0 b-t">' + 
 									'<i class="fa fa-calendar fa-2x pull-left ml-r"></i>' + 
-									'<p class="list-group-item-text">Quantity</p>' + 
-									'<h4 class="list-group-item-heading item-quantity">' + all_items[key].quantity + '</h4>' + 
+									'<p class="list-group-item-text">Stock</p>' + 
+									'<h4 class="list-group-item-heading item-stock">' + all_items[key].stock + '</h4>' + 
 								'</div>' + 
 							'</div>' + 
 						'</div>' + 
