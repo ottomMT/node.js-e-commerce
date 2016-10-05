@@ -130,7 +130,7 @@ router.post('/view', function(req, res){
 					'<td>$' + all_items[key].price + '</td>' + 
 					'<td>' + all_items[key].status + '</td>' + 
 					'<td>' + all_items[key].date + '</td>' + 
-					'<td>' + all_items[key].quantity + '</td>' + 
+					'<td>' + all_items[key].stock + '</td>' + 
 					'<td>' + 
 						'<a href="/user/products/edit/' + all_items[key]._id + '" class="text-success"><span class="glyphicon glyphicon-pencil" title="Edit"></span></a> &nbsp; &nbsp;' + 
 						'<a href="#_" class="text-danger delete-product" item_id="' + all_items[key]._id + '"><span class="glyphicon glyphicon-remove" title="Delete"></span></a>' + 
@@ -233,7 +233,7 @@ router.post('/create', function(req, res) {
         'excerpt' : req.body.excerpt,
         'price' : parseFloat(req.body.price),
         'status' : req.body.status,
-        'quantity' : parseInt(req.body.quantity),
+        'stock' : parseInt(req.body.stock),
         'date' : req.body.date
     }, function (err, doc) {
         if (err) {
@@ -292,7 +292,7 @@ router.post('/update', upload_image.array('images'), function(req, res, next){
 			'excerpt' : req.body.excerpt,
 			'price' : parseFloat(req.body.price),
 			'status' : req.body.status,
-			'quantity' : parseInt(req.body.quantity),
+			'stock' : parseInt(req.body.stock),
 			'date' : req.body.date
 		}
     }, function (err, doc) {
