@@ -4,7 +4,7 @@ Companies nowadays are now turning their businesses online to provide their cust
 ## Demo
 This simple e-commerce application demonstrates CRUD operations using mongoDB and a simple implementation of a session based user authentication using Passport.js. It also utilizes real time update front-end products using socket.io.  This web app is 100% free to use, you can customize it to build a more sophisticated e-commerce web application. Feel free to submit an issue on GitHub if you found any bug or even better – submit a pull request.
 
-This web application is currently hosted on Heroku, [click here](https://evening-cove-56191.herokuapp.com/) to view the demo. Heroku is for testing only - it does not support file uploads as the filesystem is readonly. Although you can still test the image upload functionality but all images will automatically be deleted after a couple of minutes.
+This web application is currently hosted on Heroku, [click here](https://nodejs-ecommerce.herokuapp.com/) to view the demo. Heroku is for testing only - it does not support file uploads as the filesystem is readonly. Although you can still test the image upload functionality but all images will automatically be deleted after a couple of minutes.
 
 ## Modules Used
 + async
